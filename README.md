@@ -31,7 +31,7 @@ Things you may want to cover:
 | Column             | Type        | Options                         |
 | --------           | ----------- | ------------------------------- |
 | nickname           | string      | null: false                     |
-| email              | string      | null: false                     |
+| email              | string      | null: false unique: true        |
 | encrypted_password | string      | null: false                     |
 | first_name         | string      | null: false                     |
 | last_name          | string      | null: false                     |
@@ -51,11 +51,11 @@ Things you may want to cover:
 | --------  | ----------- | ------------------------------- |
 | title     | string      | null: false                     |
 |description| text        | null: false                     |
-| category  | string      | null: false                     |
-|status-id  | integer     | null: false                     |
-|shipping-id| integer     | null: false                     |
-| area-id   | integer     | null: false                     |
-| days-id   | integer     | null: false,                    |
+|category_id| string      | null: false                     |
+|status_id  | integer     | null: false                     |
+|shipping_id| integer     | null: false                     |
+| area_id   | integer     | null: false                     |
+| days_id   | integer     | null: false,                    |
 | price     | integer     | null: false,                    |
 | user      | references  | null: false, foreign_key: true  |
 
@@ -64,7 +64,7 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user
-- belongs_to :buyer
+- has_one    :buyer
 
 
 ## buyers テーブル
@@ -76,8 +76,8 @@ Things you may want to cover:
 
 ### Association
 
-- has_one    :user
-- has_one    :item
+- belongs_to :user
+- belongs_to :item
 - has_one    :shipping
   
 ## shippings テーブル
@@ -85,7 +85,7 @@ Things you may want to cover:
 | Column      | Type        |  Options                        |
 | ----------- | ----------- | ------------------------------- |
 | postal_code | string      | null: false                     |
-| area-id     | integer     | null: false                     |
+| area_id     | integer     | null: false                     |
 | municipality| string      | null: false                     |
 | address     | string      | null: false                     |
 | building    | string      |                                 |
