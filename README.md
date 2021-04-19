@@ -51,7 +51,7 @@ Things you may want to cover:
 | --------  | ----------- | ------------------------------- |
 | title     | string      | null: false                     |
 |description| text        | null: false                     |
-|category_id| string      | null: false                     |
+|category_id| integer      | null: false                     |
 |status_id  | integer     | null: false                     |
 |shipping_id| integer     | null: false                     |
 | area_id   | integer     | null: false                     |
@@ -90,8 +90,7 @@ Things you may want to cover:
 | address     | string      | null: false                     |
 | building    | string      |                                 |
 | phone       | string      | null: false                     |
-| user        | references  | null: false, foreign_key: true  |
-| item        | references  | null: false, foreign_key: true  |
+| buyer       | references  | null: false, foreign_key: true  |
 
 ### Association
 
