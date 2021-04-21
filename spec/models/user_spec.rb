@@ -27,7 +27,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include('Email is invalid')
     end
     it 'パスワードが必須であること' do
-      @user. password = ''
+      @user.password = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Password can't be blank", "Password confirmation doesn't match Password")
     end
@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
       @user.password = '123456'
       @user.password_confirmation = '123456'
       @user.valid?
-      expect(@user.errors.full_messages).to include('Password is invalid', 'Password confirmation is invalid')
+      expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
     end
     it 'パスワードは、確認用を含めて2回入力すること' do
       @user.password = '123456'
@@ -78,9 +78,9 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include('First name kana is invalid. Input full-width katakana characters.')
     end
     it '生年月日が必須であること' do
-      @user.date = ''
+      @user.birthday = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include("Date can't be blank")
+      expect(@user.errors.full_messages).to include("Birthday can't be blank")
     end
   end
 end
