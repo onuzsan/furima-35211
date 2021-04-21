@@ -8,7 +8,7 @@ RSpec.describe User, type: :model do
     it 'ニックネームが必須であること' do
       @user.nickname = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include "Nickname can't be blank"
+      expect(@user.errors.full_messages).to include （"Nickname can't be blank"）
     end
     it 'メールアドレスが必須であること' do
       @user.email = ''
