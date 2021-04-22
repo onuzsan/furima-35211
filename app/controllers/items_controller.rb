@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show]
+  before_action :authenticate_user!, only: [:new]
   def index
   end
   
@@ -8,11 +8,13 @@ class ItemsController < ApplicationController
   end
 
   def create 
-     @item = Item.new(item_params)
-     
+      @item = Item.new(item_params)
+    if
      @item .save
      redirect_to root_path
-    
+    else 
+      render :new
+    end
   end
 
 
@@ -27,9 +29,7 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:image,:title,:description, :category_id,:status_id,:shipping_id,:area_id,:schedule_id,:price,).merge(user_id: current_user.id)
   end
 
-    def move_to_index
-     unless user_signed_in?
-     redirect_to action: :index
-    end
-  end
+    
+   
+  
 end
