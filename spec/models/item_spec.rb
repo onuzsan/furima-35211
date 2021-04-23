@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
+  
   before do
     @item = FactoryBot.build(:item)
   end
@@ -31,7 +31,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Category can't be blank", 'Category is not a number')
     end
     it 'カテゴリーは１が選択された場合は出品できないこと' do
-      @item.category_id ='1'
+      @item.category_id =1
       @item.valid?
       expect(@item.errors.full_messages).to include("Category must be other than 1")
     end
@@ -41,7 +41,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Status can't be blank", 'Status is not a number')
     end
     it '商品の状態は１が選択された場合は出品できないこと' do
-      @item.status_id = '1'
+      @item.status_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Status must be other than 1")
     end
@@ -51,7 +51,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Shipping can't be blank", 'Shipping is not a number')
     end
     it '配送料の負担は１が選択された場合は出品できないこと' do
-      @item.shipping_id = '1'
+      @item.shipping_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Shipping must be other than 1")
     end
@@ -61,7 +61,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Area can't be blank", 'Area is not a number')
     end
     it '発送元の地域は１が選択された場合は出品できないこと' do
-      @item.area_id = '1'
+      @item.area_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Area must be other than 1")
     end
@@ -71,7 +71,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Schedule can't be blank", 'Schedule is not a number')
     end
     it '発送までの日数は１が選択された場合は出品できないこと' do
-      @item.schedule_id = '1'
+      @item.schedule_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Schedule must be other than 1")
     end
@@ -91,12 +91,12 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Price is invalid")
     end
     it '販売価格は、¥300~¥9,999,999の間のみ保存可能であること' do
-      @item.price, = '100'
+      @item.price, = 100
       @item.valid?
       expect(@item.errors.full_messages).to include('Price is invalid')
     end
     it '商品価格が10,000,000以上では登録できないこと' do
-      @item.price, = '10000000000000'
+      @item.price, = 10000000000000
       @item.valid?
       expect(@item.errors.full_messages).to include('Price is invalid')
     end
