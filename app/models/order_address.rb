@@ -7,7 +7,7 @@ class OrderAddress
     validates :area_id, numericality: { other_than: 1 }
     validates :municipality
     validates :house_number
-    validates :phone, format: { with: /\A\d{11}\z/ }
+    validates :phone, length: { maximum: 11 }
     validates :user_id
     validates :item_id
     validates :token

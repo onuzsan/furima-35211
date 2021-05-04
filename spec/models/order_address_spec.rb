@@ -4,7 +4,7 @@ RSpec.describe OrderAddress, type: :model do
   before do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.create(:item)
-    @address = FactoryBot.build(:order_address, user_id: @user.id,  item_id: @item.id)
+    @address = FactoryBot.build(:order_address, user_id: @user.id, item_id: @item.id)
   end
   describe '商品出品登録' do
     it '全て入力されている状態で保存出来る' do
@@ -43,12 +43,12 @@ RSpec.describe OrderAddress, type: :model do
     it ' 電話番号が必須であること ' do
       @address.phone = ''
       @address.valid?
-      expect(@address.errors.full_messages).to include("Phone can't be blank", 'Phone is invalid')
+      expect(@address.errors.full_messages).to include("Phone can't be blank")
     end
     it '電話番号は11桁以内の数値のみ保存可能なこと（09012345678となる）' do
-      @address.phone = '090111111'
+      @address.phone = '090111111111111'
       @address.valid?
-      expect(@address.errors.full_messages).to include('Phone is invalid')
+      expect(@address.errors.full_messages).to include('Phone is too long (maximum is 11 characters)')
     end
     it 'tokenが空では登録できないこと' do
       @address.token = nil
@@ -64,6 +64,11 @@ RSpec.describe OrderAddress, type: :model do
       @address.item_id = nil
       @address.valid?
       expect(@address.errors.full_messages).to include("Item can't be blank")
+    end
+    it '建物名は空でも登録できる' do
+      @address.building = nil
+      @address.valid?
+      expect(@address.building)
     end
   end
 end
