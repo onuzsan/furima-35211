@@ -11,8 +11,11 @@ class OrdersController < ApplicationController
   end
 
   def create
+    if current_user.id == @item.user.id || @item.order
+     redirect_to root_path
+    else
     @orders = OrderAddress.new(order_params)
-
+    end
     if @orders.valid?
       pay_item
       @orders.save

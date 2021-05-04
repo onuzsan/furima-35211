@@ -6,10 +6,18 @@ RSpec.describe OrderAddress, type: :model do
     @item = FactoryBot.create(:item)
     @address = FactoryBot.build(:order_address, user_id: @user.id, item_id: @item.id)
   end
-  describe '商品出品登録' do
+
+   context 'ユーザ登録ができる時' do
     it '全て入力されている状態で保存出来る' do
       expect(@address).to be_valid
     end
+    it '建物名は空でも登録できる' do
+      @address.building = nil
+      @address.valid?
+      expect(@address.building)
+    end
+   end
+   context 'ユーザ登録ができない時' do
     it '郵便番号が必須であること ' do
       @address.postal_code = ''
       @address.valid?
@@ -65,10 +73,6 @@ RSpec.describe OrderAddress, type: :model do
       @address.valid?
       expect(@address.errors.full_messages).to include("Item can't be blank")
     end
-    it '建物名は空でも登録できる' do
-      @address.building = nil
-      @address.valid?
-      expect(@address.building)
-    end
+
   end
 end
